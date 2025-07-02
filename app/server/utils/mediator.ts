@@ -8,16 +8,16 @@ function bind<
   return target[method].bind(target) as T[M];
 }
 
-const mediator = {
+const dispatcher = {
   // Example of binding a method from a service to the mediator
   // action : bind(service, "methodName"),
-  greet: bind($container.helloService, "greet"),
+  greet: bind(di.helloService, "greet"),
 };
 
-export function $mediator<Action extends keyof typeof mediator>(
+export function mediator<Action extends keyof typeof dispatcher>(
   action: Action,
-  ...params: Parameters<(typeof mediator)[Action]>
-): ReturnType<(typeof mediator)[Action]> {
+  ...params: Parameters<(typeof dispatcher)[Action]>
+): ReturnType<(typeof dispatcher)[Action]> {
   // @ts-expect-error
-  return mediator[action](...params);
+  return dispatcher[action](...params);
 }

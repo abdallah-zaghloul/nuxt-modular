@@ -1,7 +1,11 @@
 export class HelloService {
-  constructor(private helloRepo: HelloRepo) {}
+  constructor(
+    private helloRepo: HelloRepo,
+    private count: number = 5
+  ) {}
 
-  async greet(): Promise<Hello> {
-    return this.helloRepo.greet();
+  greet(): string {
+    console.log(this.count);
+    return `hello Service: ${this.helloRepo.greet()} count is: ${this.count}`;
   }
 }
