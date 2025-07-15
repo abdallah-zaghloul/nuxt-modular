@@ -11,7 +11,7 @@ function bind<
 const dispatcher = {
   // Example of binding a method from a service to the mediator
   // action : bind(service, "methodName"),
-  greet: bind(di.helloService, "greet"),
+  getUser: bind(di.authService, "getUser"), // call the external auth service
 };
 
 export function mediator<Action extends keyof typeof dispatcher>(

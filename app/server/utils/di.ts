@@ -43,4 +43,8 @@ function diContainer<D extends Dependencies>(dependencies: D): Container<D> {
 export const di = diContainer({
   HelloService,
   HelloRepo,
+  UserRepo,
+  AuthService,
+  OrderRepo,
+  OrderService,
 });

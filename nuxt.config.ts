@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   devtools: { enabled: true },
-  extends: ["app"], //override app dir (monolith) with app layer(modular)
+  extends: ["app", "auth", "ecommerce"], //override app dir (monolith) with app layer(modular)
   modules: [
     "@nuxt/content",
     "@nuxt/eslint",
