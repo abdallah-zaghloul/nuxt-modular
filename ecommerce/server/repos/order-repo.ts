@@ -1,12 +1,51 @@
 export class OrderRepo {
-  private orders: Order[] = [
-    { id: 1, userId: 1, orderName: "Order 1 of user No: 1 abdallah" },
-    { id: 2, userId: 1, orderName: "Order 2 of user No: 1 abdallah" },
-    { id: 3, userId: 2, orderName: "Order 1 of user No: 2 zaghloul" },
-    { id: 4, userId: 2, orderName: "Order 2 of user No: 2 zaghloul" },
-  ];
+  getUserOrders(userId: Order["userId"]): Promise<Order[]> {
+    return db.order.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+  }
 
-  getUserOrders(userId: Order["userId"]): Order[] {
-    return this.orders.filter((order) => order.userId === userId);
+  showUserOrder(data: Pick<Order, "id" | "userId">): Promise<Order | null> {
+    return db.order.findUnique({
+      where: {
+        id: data.id,
+        userId: data.userId,
+      },
+    });
+  }
+
+  create(data: Omit<Order, "id">): Promise<Order> {
+    return db.order.create({
+      data: {
+        userId: data.userId,
+        name: data.name,
+      },
+    });
+  }
+
+  updateUserOrder(data: Pick<Order, "id" | "name" | "userId">): Promise<Order> {
+    return db.order.update({
+      where: {
+        id: data.id,
+        userId: data.userId,
+      },
+      data: {
+        name: data.name,
+      },
+    });
+  }
+
+  deleteUserOrder(data: Pick<Order, "id" | "userId">): Promise<boolean> {
+    return db.order
+      .delete({
+        where: {
+          id: data.id,
+          userId: data.userId,
+        },
+      })
+      .then(() => true)
+      .catch(() => false);
   }
 }

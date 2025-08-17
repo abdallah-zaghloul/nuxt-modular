@@ -1,5 +1,1 @@
-export type Order = {
-  id: number;
-  userId: number;
-  orderName: string;
-};
+export type { Order } from "@prisma/client";
