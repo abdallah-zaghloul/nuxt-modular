@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       websocket: true,
+      tasks: true,
     },
     imports: {
       dirs: [
